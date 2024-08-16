@@ -136,7 +136,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <ul class="nav nav-tabs nav-tabs-custom nav-success mb-3" role="tablist">
+                            <ul class="nav nav-tabs nav-tabs-custom mb-2 nav-success mb-3" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link @yield('all-invoices-list-page')"
                                        href="{{ url('/admin/invoices') }}" role="tab" aria-selected="true">
@@ -166,9 +166,8 @@
 
                             </ul>
 
-                            <div class="table-card">
-                                <table id="DataTables_Table_0"
-                                       class="table nowrap dt-responsive align-middle table-hover table-bordered mb-0 dataTable no-footer dtr-inline collapsed">
+                            <div class="table-card mt-2 mt-2">
+                                <table id="DataTables_Table_0" class="table table-sm dt-responsive align-middle table-hover table-bordered mb-0 dataTable no-footer dtr-inline collapsed">
                                     <thead class="table-light">
                                     <tr>
                                         <th>Invoice Number</th>

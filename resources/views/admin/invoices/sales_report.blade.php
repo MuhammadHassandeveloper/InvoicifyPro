@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-card table-responsive">
-                                <table id="DataTables_Table_0" class="table nowrap dt-responsive align-middle table-hover table-bordered mb-0 dataTable no-footer dtr-inline collapsed">
+                                <table id="DataTables_Table_0" class="table table-sm dt-responsive align-middle table-hover table-bordered mb-0 dataTable no-footer dtr-inline collapsed">
                                     <thead class="table-light">
                                     <tr>
                                         <th>#</th>

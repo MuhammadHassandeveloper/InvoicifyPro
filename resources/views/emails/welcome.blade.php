@@ -19,7 +19,7 @@
             max-width: 600px;
         }
         .header {
-            background-color: #007bff;
+            background-color: #ffaa33FF;
             color: #ffffff;
             padding: 20px;
             text-align: center;
@@ -40,12 +40,12 @@
             margin: 10px 0;
             font-size: 16px;
             color: #ffffff;
-            background-color: #007bff;
+            background-color: #ffaa33FF;
             text-decoration: none;
             border-radius: 5px;
         }
         .button:hover {
-            background-color: #0056b3;
+            background-color: #ec8d08;
         }
     </style>
 </head>

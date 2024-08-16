@@ -23,8 +23,8 @@
                                 You can use this section to view and manage the different countries associated with your clients. Ensure that each client is assigned to the correct country for accurate invoicing and operations.
                             </div>
 
-                            <div class="table-card">
-                                <table id="DataTables_Table_0" class="table nowrap dt-responsive align-middle table-hover table-bordered mb-0 dataTable no-footer dtr-inline collapsed">
+                            <div class="table-card mt-2 mt-2">
+                                <table id="DataTables_Table_0" class="table table-sm dt-responsive align-middle table-hover table-bordered mb-0 dataTable no-footer dtr-inline collapsed">
                                     <thead class="table-light">
                                     <tr>
                                         <th>Country Name</th>

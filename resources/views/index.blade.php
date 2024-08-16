@@ -7,8 +7,8 @@
     <title>{{ App\Helpers\AppHelper::site_name() }} | @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="{{ App\Helpers\AppHelper::site_name() }}">
-    <meta content="{{ App\Helpers\AppHelper::site_name() }}">
     <!-- App favicon -->
+    <link rel="shortcut icon" style="height: 80px; width: 120px;" href="{{ asset('assets/logo/'.App\Helpers\AppHelper::fav_icon()) }}">
     <link href="{{ asset('assets/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet" type="text/css">
     <script src="{{ asset('assets/js/layout.js') }}"></script>
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -40,12 +40,20 @@
             <div class="col-md-11">
                 <div class="auth-full-page-content d-flex min-vh-100 py-sm-5 py-4">
                     <div class="w-100">
-                        <div class="d-flex flex-column h-100 py-0 py-xl-4">
-
+                        <div class="d-flex flex-column h-100 py-0">
+                            <div class="text-center mb-2">
+                                <a href="{{ url('/') }}">
+                                    <span class="logo-lg">
+                                        <img src="{{ asset('assets/logo/'.App\Helpers\AppHelper::dark_logo()) }}" alt="" height="66">
+                                    </span>
+                                </a>
+                            </div>
                             <div class="card my-auto overflow-hidden">
                                 <div class="row g-0">
                                     <div class="col-lg-6">
+
                                         <div class="p-lg-5 p-4">
+
                                             <div class="text-center">
                                                 <h5 class="mb-0">Welcome Back !</h5>
                                                 <p class="text-muted mt-2">Sign in to continue to {{ App\Helpers\AppHelper::site_name() }}.</p>
@@ -58,7 +66,7 @@
                                                     <div class="mb-3">
                                                         <label for="email" class="form-label">Email</label>
                                                         <input class="form-control" name="email" type="email" id="email"
-                                                               required="" placeholder="example@gmail.com">
+                                                               required="" placeholder="admin@admin.com" value="admin@admin.com">
                                                         @if ($errors->has('email'))
                                                             <span
                                                                 class="text-danger mt-1 error invalid-tooltip">{{ $errors->first('email') }}</span>
@@ -70,7 +78,7 @@
                                                         <div class="position-relative auth-pass-inputgroup mb-3">
                                                             <input name="password" type="password"
                                                                    class="form-control pe-5 password-input"
-                                                                   placeholder="Enter password" id="password-input" required>
+                                                                   placeholder="Enter password" id="password-input" required value="12345678" >
                                                             @if ($errors->has('password'))
                                                                 <span
                                                                     class="text-danger mt-1 error invalid-tooltip">{{ $errors->first('password') }}</span>
@@ -109,6 +117,8 @@
                                                             <button type="button" data-bs-target="#reviewcarouselIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
                                                             <button type="button" data-bs-target="#reviewcarouselIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
                                                             <button type="button" data-bs-target="#reviewcarouselIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                                                            <button type="button" data-bs-target="#reviewcarouselIndicators" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                                                            <button type="button" data-bs-target="#reviewcarouselIndicators" data-bs-slide-to="7" aria-label="Slide 8"></button>
                                                         </div>
 
                                                         <!-- end carouselIndicators -->
@@ -124,9 +134,9 @@
 
                                                             <div class="carousel-item">
                                                                 <div class="testi-contain text-center">
-                                                                    <h5 class="fs-20 text-white mb-0">“Comprehensive Client Details”</h5>
+                                                                    <h5 class="fs-20 text-white mb-0">“Comprehensive Client Management”</h5>
                                                                     <p class="fs-17 text-white mt-2 mb-0">
-                                                                        Manage your client information with ease. Our system allows you to store detailed billing and shipping addresses, ensuring accurate and professional invoices every time.
+                                                                        Store detailed client information with ease. Manage billing and shipping addresses efficiently for accurate and professional invoices.
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -135,16 +145,16 @@
                                                                 <div class="testi-contain text-center">
                                                                     <h5 class="fs-20 text-white mb-0">“Integrated Stripe Payments”</h5>
                                                                     <p class="fs-17 text-white mt-2 mb-0">
-                                                                        Simplify payments with Stripe integration. Send invoices with payment links directly to clients' emails, enabling them to pay securely online through a seamless and user-friendly interface.
+                                                                        Simplify payments with Stripe integration. Send invoices with secure payment links directly to clients' emails for a seamless payment experience.
                                                                     </p>
                                                                 </div>
                                                             </div>
 
                                                             <div class="carousel-item">
                                                                 <div class="testi-contain text-center">
-                                                                    <h5 class="fs-20 text-white mb-0">“Dynamic Tax and Discount Management”</h5>
+                                                                    <h5 class="fs-20 text-white mb-0">“Dynamic Tax & Discount Management”</h5>
                                                                     <p class="fs-17 text-white mt-2 mb-0">
-                                                                        Our system provides dynamic management of taxes and discounts, tailored to different countries and regions. Easily configure and apply rates to ensure compliance and optimize your pricing strategies.
+                                                                        Manage taxes and discounts dynamically, tailored to different regions. Easily configure rates for compliance and pricing strategies.
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -153,7 +163,7 @@
                                                                 <div class="testi-contain text-center">
                                                                     <h5 class="fs-20 text-white mb-0">“Real-time Stock Management”</h5>
                                                                     <p class="fs-17 text-white mt-2 mb-0">
-                                                                        Stay updated with real-time stock management. Track product availability, manage out-of-stock items, and ensure your inventory is always accurate and up-to-date.
+                                                                        Track product availability and manage out-of-stock items with real-time updates, ensuring accurate and up-to-date inventory.
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -162,7 +172,43 @@
                                                                 <div class="testi-contain text-center">
                                                                     <h5 class="fs-20 text-white mb-0">“User-friendly Dashboards”</h5>
                                                                     <p class="fs-17 text-white mt-2 mb-0">
-                                                                        Both admin and client dashboards are designed for ease of use, providing a comprehensive overview of invoices, payments, and client details. Navigate effortlessly through your data and manage your operations efficiently.
+                                                                        Navigate effortlessly through admin and client dashboards, providing a comprehensive overview of invoices, payments, and client details.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="carousel-item">
+                                                                <div class="testi-contain text-center">
+                                                                    <h5 class="fs-20 text-white mb-0">“Efficient Accountant Features”</h5>
+                                                                    <p class="fs-17 text-white mt-2 mb-0">
+                                                                        Manage transactions, track payments, and generate financial reports with comprehensive accounting tools.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="carousel-item">
+                                                                <div class="testi-contain text-center">
+                                                                    <h5 class="fs-20 text-white mb-0">“Comprehensive Product Management”</h5>
+                                                                    <p class="fs-17 text-white mt-2 mb-0">
+                                                                        Manage products, categories, and brands with ease. Create detailed invoices including selected products for accuracy and professionalism.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="carousel-item">
+                                                                <div class="testi-contain text-center">
+                                                                    <h5 class="fs-20 text-white mb-0">“Flexible Invoice Creation”</h5>
+                                                                    <p class="fs-17 text-white mt-2 mb-0">
+                                                                        Customize invoices with control over product selection, quantities, prices, and additional charges. Generate and send invoices with all necessary details.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="carousel-item">
+                                                                <div class="testi-contain text-center">
+                                                                    <h5 class="fs-20 text-white mb-0">“Payment Link Sharing & Reporting”</h5>
+                                                                    <p class="fs-17 text-white mt-2 mb-0">
+                                                                        Admins can copy and share payment links via email or social platforms. Download invoices, client details, products, sales reports, and transactions in PDF, Excel, or print formats.
                                                                     </p>
                                                                 </div>
                                                             </div>

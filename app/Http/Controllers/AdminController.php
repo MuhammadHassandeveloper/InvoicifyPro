@@ -225,13 +225,12 @@ class AdminController extends Controller
         foreach (['site_white_logo', 'site_dark_logo', 'site_fav_icon'] as $field) {
             if ($request->hasFile($field)) {
                 $file = $request->file($field);
-                $fileName = $file->getClientOriginalName();
-                if ($siteSettings->$field !== $fileName) {
-                    $file->move(public_path('assets/logo'), $fileName);
-                    $siteSettings->$field = $fileName;
-                }
+                $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('assets/logo'), $fileName);
+                $siteSettings->$field = $fileName;
             }
         }
+
 
         $siteSettings->save();
 

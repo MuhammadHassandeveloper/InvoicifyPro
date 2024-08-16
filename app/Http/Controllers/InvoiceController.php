@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InvoiceMail;
 use App\Models\Country;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
@@ -298,7 +299,7 @@ class InvoiceController extends Controller
 
             $stripeInvoice->finalizeInvoice();
             $stripeInvoice = \Stripe\Invoice::retrieve($stripeInvoice->id);
-            $invoice = Invoices::create([
+            $myinvoice = Invoices::create([
                 'user_id' => Sentinel::getUser()->id,
                 'customer_id' => $customer->id,
                 'country_id' => $customer->country->id,
@@ -327,7 +328,7 @@ class InvoiceController extends Controller
 
             foreach ($request->product_description as $key => $description) {
                 InvoicesItems::create([
-                    'invoice_id' => $invoice->id,
+                    'invoice_id' => $myinvoice->id,
                     'customer_id' => $customer->id,
                     'stripe_customer_id' => $customer->stripe_customer_id,
                     'stripe_invoice_id' => $stripeInvoice->id,
@@ -340,12 +341,16 @@ class InvoiceController extends Controller
 
             $stripeInvoice->auto_advance = true;
             $stripeInvoice->save();
+            $customer = User::find($request->client_id);
 
+            $senderName = Sentinel::getUser()->first_name . ' ' . Sentinel::getUser()->last_name;
+            $senderEmail = Sentinel::getUser()->email;
+            $res = Mail::to($customer->email)->send(new InvoiceMail($myinvoice, $customer->first_name, $customer->last_name, $customer->email, $customer->phone, $customer->billing_address,$senderName,$senderEmail));
             AppHelper::storeActivity(Sentinel::getUser()->id,'Create Invoice',$request->all());
             return response()->json([
                 'success' => true,
-                'message' => 'Invoice created successfully.',
-                'invoice_id' => $invoice->id
+                'message' => 'Invoice created and payment link also sent successfully on client email address',
+                'invoice_id' => $myinvoice->id
             ]);
         } catch (\Exception $e) {
             return response()->json([

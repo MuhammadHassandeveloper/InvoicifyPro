@@ -15,8 +15,8 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="table-card">
-                                    <table id="DataTables_Table_0" class="table nowrap dt-responsive align-middle table-hover table-bordered mb-0 dataTable no-footer dtr-inline collapsed">
+                            <div class="table-card mt-2 mt-2">
+                                    <table id="DataTables_Table_0" class="table table-sm dt-responsive align-middle table-hover table-bordered mb-0 dataTable no-footer dtr-inline collapsed">
                                         <thead class="table-light">
                                         <tr>
                                             <th>Full Name</th>
