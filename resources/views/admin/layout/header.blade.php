@@ -2,6 +2,7 @@
     <div class="layout-width">
         <div class="navbar-header">
             <div class="d-flex">
+
                 <!-- LOGO -->
 {{--                <div class="navbar-brand-box horizontal-logo">--}}
 {{--                    <a href="index.html" class="logo logo-dark">--}}
@@ -32,10 +33,10 @@
                 </button>
 
                 <!-- App Search-->
-                <form class="app-search d-none d-md-block me-2">
+                <form class="app-search  ms-2">
                     <div class="position-relative">
                             <div class="mt-1">
-                                <a href="{{ route('admin.invoices.create') }}" class="btn btn-primary">Create Invoice</a>
+                                <a href="{{ route('admin.invoices.create') }}" class="btn btn-primary">Send Invoice</a>
                             </div>
                     </div>
                 </form>

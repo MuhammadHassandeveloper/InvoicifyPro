@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4 class="ml-3"><b>{{ $title }}</b></h4>
-                <a href="{{ route('admin.clients.create') }}" class="btn btn-primary" >Create Client</a>
+                <a href="{{ route('admin.clients.create') }}" class="btn btn-primary" >Add Client</a>
             </div>
 
             <div class="row">
@@ -46,7 +46,6 @@
                                     <thead class="table-light">
                                     <tr>
                                         <th>Name</th>
-                                        <th>Email</th>
                                         <th>Phone</th>
                                         <th>Created At</th>
                                         <th>Status</th>
@@ -59,7 +58,6 @@
                                             <td>
                                                 <a href="{{ route('admin.clients.edit',$client->id) }}" class="text-body align-middle fw-medium">{{ $client->first_name }} {{ $client->last_name }}</a>
                                             </td>
-                                            <td>{{ $client->email }}</td>
                                             <td>{{ $client->phone }}</td>
                                             <td>{{ $client->created_at->format('d M Y ') }}</td>
                                             <td>

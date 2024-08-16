@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4 class="ml-3"><b>{{ $title }}</b></h4>
-                <a href="{{ route('admin.accountants.create') }}" class="btn btn-primary">Create Accountant</a>
+                <a href="{{ route('admin.accountants.create') }}" class="btn btn-primary">Add Accountant</a>
             </div>
 
             <div class="row">

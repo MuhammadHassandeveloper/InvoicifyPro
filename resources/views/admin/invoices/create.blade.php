@@ -11,6 +11,43 @@
         .table-nowrap td, .table-nowrap th {
             white-space: normal !important;
         }
+
+        @media (max-width: 768px) {
+            .invoice-table td {
+                display: block;
+                width: 100%;
+                text-align: left;
+                padding: 10px 0;
+            }
+
+            .invoice-table th {
+                display: none; /* Hide table headers on mobile */
+            }
+
+            .invoice-table td.text-end {
+                text-align: left; /* Align text to the left */
+            }
+
+            .product-detail {
+                margin-bottom: 1rem;
+            }
+
+            .product-detail select,
+            .product-detail textarea {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .input-step {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+
+            .product-removal {
+                text-align: right;
+            }
+        }
     </style>
 @endsection
 @section('content')

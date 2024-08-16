@@ -112,7 +112,7 @@ class ClientController extends Controller
         ]);
         User::where('id', $user->id)->update($data);
         $role = Sentinel::findRoleByName('customer');
-        AppHelper::storeActivity(Sentinel::getUser()->id,'Create Client',$request->all());
+        AppHelper::storeActivity(Sentinel::getUser()->id,'Add Client',$request->all());
 
         if ($role) {
             $role->users()->attach($user);

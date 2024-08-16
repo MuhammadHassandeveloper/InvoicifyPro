@@ -14,7 +14,7 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4 class="ml-3"><b>{{ $title }}</b></h4>
 
-                <a href="{{ route('admin.clients.create') }}" class="btn btn-primary" >Create Client</a>
+                <a href="{{ route('admin.clients.create') }}" class="btn btn-primary" >Add Client</a>
             </div>
 
             <div class="row">
@@ -47,7 +47,6 @@
                                     <thead class="table-light">
                                     <tr>
                                         <th>Name</th>
-                                        <th>Email</th>
                                         <th>Phone</th>
                                         <th>Created At</th>
                                         <th>Status</th>
@@ -62,7 +61,6 @@
                                                     {{ $client->first_name }} {{ $client->last_name }} <span class="badge text-bg-warning">{{ $client->country->iso_code }}</span>
                                                 </a>
                                             </td>
-                                            <td>{{ $client->email }}</td>
                                             <td>{{ $client->phone }}</td>
                                             <td>{{ $client->created_at->format('d M Y ') }}</td>
                                             <td>
