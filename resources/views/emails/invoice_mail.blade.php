@@ -292,17 +292,7 @@
                                                                             </table>
                                                                         </th>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <th class="column-top" width="147" bgcolor="#ffffff" style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top;">
-                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                                                <tr style="padding:5px; border-bottom:2px dashed #ffaa33FF; background-color: white; border-radius: 5px;">
-                                                                                    <td class="h4 center pb5" style="border-radius: 5px; font-family:Verdana, Geneva, Tahoma, sans-serif; font-size:11px; font-weight: 400; line-height:18px; text-align:left; padding-top:15px;">
-                                                                                        <b>Note:</b>   {{ $myinvoice['note'] }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </th>
-                                                                    </tr>
+
                                                                 </table>
                                                             </td>
                                                         </tr>
