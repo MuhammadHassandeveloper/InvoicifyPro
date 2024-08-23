@@ -23,6 +23,7 @@ use Validator;
 use Auth;
 use App\Models\Product;
 
+
 class InvoiceController extends Controller
 {
 
@@ -237,7 +238,7 @@ class InvoiceController extends Controller
                     'quantity' => $quantity,
                     'unit_amount' => $unitAmount * 100,
                     'currency' => $currencyCode,
-                    'description' => 'Item Name:'.' '.$pname . '____' .'Description:'.' '.substr($description, 0, 140),
+                    'description' => 'Item Name:' . ' ' . $pname . '____' . 'Description:' . ' ' . substr($description, 0, 140),
                 ]);
             }
 
@@ -300,58 +301,65 @@ class InvoiceController extends Controller
             $stripeInvoice->finalizeInvoice();
             $stripeInvoice = \Stripe\Invoice::retrieve($stripeInvoice->id);
             $myinvoice = Invoices::create([
-                'user_id' => Sentinel::getUser()->id,
-                'customer_id' => $customer->id,
-                'country_id' => $customer->country->id,
-                'stripe_invoice_id' => $stripeInvoice->id,
-                'stripe_invoice_number' => $stripeInvoice->number,
-                'stripe_invoice_url' => $stripeInvoice->hosted_invoice_url,
-                'stripe_invoice_pdf_url' => $stripeInvoice->invoice_pdf,
-                'stripe_customer_id' => $customer->stripe_customer_id,
-                'sub_amount' => $totalAmount,
-                'amount' => $finalTotalAmount,
-                'description' => $request->note,
-                'note' => $request->note,
-                'period_start' => now(),
-                'period_end' =>date('Y-m-d',strtotime($request->due_date)),
-                'invoice_paid_date' => null,
-                'invoice_paid_time' => null,
-                'status' => $stripeInvoice->status,
-                'charge_id' => $stripeInvoice->charge,
-                'tax_id' => $request->tax_id,
-                'discount_id' => $request->discount_id,
-                'charge_shipping_id' => $request->shipping_charge_id,
-                'total_tax_amount' => $totalTaxAmount,
-                'total_charge_amount' => $totalShippingAmount,
-                'total_discount_amount' => $totalDiscountAmount,
-            ]);
-
-            foreach ($request->product_description as $key => $description) {
-                InvoicesItems::create([
-                    'invoice_id' => $myinvoice->id,
-                    'customer_id' => $customer->id,
-                    'stripe_customer_id' => $customer->stripe_customer_id,
+                    'user_id' => Sentinel::getUser()->id,
+                    'customer_id' => $request->client_id,
+                    'country_id' => $request->country_id,
                     'stripe_invoice_id' => $stripeInvoice->id,
-                    'product_id' => $request->product_id[$key],
-                    'product_amount' => $request->product_price[$key],
-                    'product_quantity' => $request->product_qty[$key],
-                    'product_description' => $description,
+                    'stripe_invoice_number' => $stripeInvoice->number,
+                    'stripe_invoice_url' => $stripeInvoice->hosted_invoice_url,
+                    'stripe_invoice_pdf_url' => $stripeInvoice->invoice_pdf,
+                    'stripe_customer_id' => $request->stripe_customer_id,
+                    'sub_amount' => $totalAmount,
+                    'amount' => $finalTotalAmount,
+                    'description' => $request->note,
+                    'note' => $request->note,
+                    'period_start' => now(),
+                    'period_end' => date('Y-m-d', strtotime($request->due_date)),
+                    'invoice_paid_date' => null,
+                    'invoice_paid_time' => null,
+                    'status' => $stripeInvoice->status,
+                    'charge_id' => $stripeInvoice->charge,
+                    'tax_id' => $request->tax_id,
+                    'discount_id' => $request->discount_id,
+                    'charge_shipping_id' => $request->shipping_charge_id,
+                    'total_tax_amount' => $totalTaxAmount,
+                    'total_charge_amount' => $totalShippingAmount,
+                    'total_discount_amount' => $totalDiscountAmount,
                 ]);
-            }
 
-            $stripeInvoice->auto_advance = true;
-            $stripeInvoice->save();
-            $customer = User::find($request->client_id);
+                // Create the invoice items
+                foreach ($request->product_description as $key => $description) {
+                    InvoicesItems::create([
+                        'invoice_id' => $myinvoice->id,
+                        'customer_id' => $request->client_id,
+                        'stripe_customer_id' => $request->stripe_customer_id,
+                        'stripe_invoice_id' => $stripeInvoice->id,
+                        'product_id' => $request->product_id[$key],
+                        'product_amount' => $request->product_price[$key],
+                        'product_quantity' => $request->product_qty[$key],
+                        'product_description' => $description,
+                    ]);
+                }
 
-            $senderName = Sentinel::getUser()->first_name . ' ' . Sentinel::getUser()->last_name;
-            $senderEmail = Sentinel::getUser()->email;
-            $res = Mail::to($customer->email)->send(new InvoiceMail($myinvoice, $customer->first_name, $customer->last_name, $customer->email, $customer->phone, $customer->billing_address,$senderName,$senderEmail));
-            AppHelper::storeActivity(Sentinel::getUser()->id,'Create Invoice',$request->all());
-            return response()->json([
-                'success' => true,
-                'message' => 'Invoice created and payment link also sent successfully on client email address',
-                'invoice_id' => $myinvoice->id
-            ]);
+                // Enable auto-advance on the Stripe invoice
+                $stripeInvoice->auto_advance = true;
+                $stripeInvoice->save();
+
+                // Retrieve the customer details
+                $customer = User::find($request->client_id);
+
+                // Prepare sender details
+                $senderName = Sentinel::getUser()->first_name . ' ' . Sentinel::getUser()->last_name;
+                $senderEmail = Sentinel::getUser()->email;
+                 Mail::to($customer->email)->send(new InvoiceMail($myinvoice, $customer->first_name, $customer->last_name, $customer->email, $customer->phone, $customer->billing_address,$senderName,$senderEmail));
+
+            // Store activity log
+                AppHelper::storeActivity(Sentinel::getUser()->id, 'Create Invoice', $request->all());
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Invoice created and payment link also sent successfully to client email address',
+                    'invoice_id' => $myinvoice->id
+                ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,

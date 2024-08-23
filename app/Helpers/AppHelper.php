@@ -20,6 +20,11 @@ class AppHelper
         return $siteSettings->stripe_publish_key;
     }
 
+    public static function RESEND_API_KEY()
+    {
+        return 'RESEND_API_KEY=re_bBYchSmc_6v4SYvR8rKR1BVRQpF55HTb3';
+    }
+
     public static function stripe_secret_key()
     {
         $siteSettings = SiteSetting::first();
