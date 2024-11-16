@@ -35,7 +35,7 @@
                                     <tbody id="tax-table-body">
                                     @foreach ($taxes as $tax)
                                         <tr id="tax-{{ $tax->id }}">
-                                            <td>{{ $tax->country->name }}</td>
+                                            <td>@isset($tax->country->name) {{ $tax->country->name }} @else N/O @endisset</td>
                                             <td>{{ $tax->name }}</td>
                                             <td>{{ $tax->percentage }}%</td>
                                             <td>{{ $tax->created_at->format('d M Y ') }}</td>

@@ -35,7 +35,7 @@
                                     <tbody id="shipping-charge-table-body">
                                     @foreach ($shippingCharges as $shippingCharge)
                                         <tr id="shipping-charge-{{ $shippingCharge->id }}">
-                                            <td>{{ $shippingCharge->country->name }}</td>
+                                            <td>@isset($shippingCharge->country->name) {{ $shippingCharge->country->name }} @else N/O @endisset</td>
                                             <td>{{ $shippingCharge->name }}</td>
                                             <td>{{ $shippingCharge->percentage }}%</td>
                                             <td>{{ $shippingCharge->created_at->format('d M Y ') }}</td>
