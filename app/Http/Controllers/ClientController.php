@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AppHelper;
+use App\Models\Invoices;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Country;
@@ -178,6 +179,7 @@ class ClientController extends Controller
     public function destroy($id)
     {
         $client = User::findOrFail($id);
+        Invoices::where('customer_id',$id)->delete();
         $client->delete();
         return response()->json(['message' => 'Client deleted successfully']);
     }
